@@ -1,5 +1,1 @@
-import init from "./init";
-
-export default {
-  init
-};
+export { getCrimeData, getDataFailure, getDataSuccess } from './init';

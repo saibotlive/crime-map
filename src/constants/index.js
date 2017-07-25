@@ -1,5 +1,1 @@
-import actionTypes from "./action-types";
-
-export default {
-  actionTypes
-};
+export { actionTypes } from './action-types';
