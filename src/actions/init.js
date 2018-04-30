@@ -35,7 +35,6 @@ const getLocation = location => {
         if (status === window.google.maps.GeocoderStatus.OK) {
           resolve(results[0].geometry.location);
         } else {
-          console.log('sttt', status);
           reject(status);
         }
       }
@@ -43,22 +42,14 @@ const getLocation = location => {
   });
 };
 
-export const getCrimeData = payload => {
-  return dispatch => {
+export const getCrimeData =  payload => {
+  return async dispatch => {
     dispatch(getData());
-    getLocation(payload.location)
-      .then(
-        location =>
-          axios.get(
-            `${url}?date=${payload.date}&lat=${location.lat()}&lng=${location.lng()}`
-          ),
-        err => dispatch(getDataFailure(err))
-      )
-      .then(
-        payload => {
-          if (!payload.error) dispatch(getDataSuccess(payload));
-        },
-        err => dispatch(getDataFailure(err.response.statusText))
-      );
+    const location = await getLocation(payload.location)
+    const resp = await axios.get(
+      `${url}?date=${payload.date}&lat=${location.lat()}&lng=${location.lng()}`
+    )
+
+    if (!resp.error) dispatch(getDataSuccess(resp));
   };
 };
