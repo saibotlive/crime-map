@@ -1,4 +1,4 @@
-import { actionTypes } from 'constants';
+import { actionTypes } from '../constants';
 
 const INITIAL_STATE = { data: [], msg: '' };
 export default function appReducer(state = INITIAL_STATE, { type, payload }) {

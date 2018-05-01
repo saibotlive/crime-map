@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import CrimeMap from 'components/crime-map';
-import './style.scss';
+import CrimeMap from '../crime-map';
+import './style.css';
 class App extends Component {
   constructor() {
     super();
@@ -26,7 +26,6 @@ class App extends Component {
 
   handleMapLoad = map => {
     this._mapComponent = map;
-    console.log('loaded', this._mapComponent);
   };
 
   showInfo = () => {

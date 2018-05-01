@@ -1,4 +1,4 @@
-import { actionTypes } from 'constants';
+import { actionTypes } from '../constants';
 import axios from 'axios';
 
 const url = 'https://data.police.uk/api/crimes-at-location';
@@ -42,14 +42,19 @@ const getLocation = location => {
   });
 };
 
-export const getCrimeData =  payload => {
+export const getCrimeData = payload => {
   return async dispatch => {
     dispatch(getData());
-    const location = await getLocation(payload.location)
-    const resp = await axios.get(
-      `${url}?date=${payload.date}&lat=${location.lat()}&lng=${location.lng()}`
-    )
-
-    if (!resp.error) dispatch(getDataSuccess(resp));
+    try {
+      const location = await getLocation(payload.location);
+      const resp = await axios.get(
+        `${url}?date=${payload.date}&lat=${location.lat()}&lng=${location.lng()}`
+      );
+      if (!resp.error) dispatch(getDataSuccess(resp));
+    } catch (err) {
+      err.response
+        ? dispatch(getDataFailure(err.response.statusText))
+        : dispatch(getDataFailure(err));
+    }
   };
 };

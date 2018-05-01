@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import { getCrimeData } from 'actions';
-import { getDataState, getMsgState } from 'selectors';
-import App from 'components/app';
+import { getCrimeData } from '../actions';
+import { getDataState, getMsgState } from '../selectors';
+import App from '../components/App';
 
 function mapStateToProps(state) {
   return {
