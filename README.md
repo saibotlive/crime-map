@@ -1,2 +1,2 @@
 ## Table of Contents
-A simple crime-map API udong Google maps.
+A simple crime-map API using Google maps.
